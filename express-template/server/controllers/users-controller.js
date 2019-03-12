@@ -14,6 +14,8 @@ module.exports = {
   },
 
   loginPost: function (req, res, next) {
+    console.log(req.body)
+
     if (!req.body.user.email) {
       return res.status(422).json({ errors: { email: "can't be blank." } })
     }

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import AppNav from './components/AppNav'
 import Home from './components/Home'
 import Login from './components/Login'
-import Articles from './components/Articles'
+import Articles from './components/Articles/Articles'
 import Register from './components/Register'
 
 class App extends Component {

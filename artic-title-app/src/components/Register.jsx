@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 import { removeEnd, kebapToCamel } from '../utils/stringParser';
 import { authService } from '../services/authService';
+import Auth from '../utils/auth';
 
 export default class Register extends Component {
-  state = {
-    username: '',
-    email: '', 
-    password: '', 
-    confPassword: '',
-    bio: '', 
-    image: '' 
+
+  constructor (props) {
+    super(props)
+    
+    this.state = {
+      username: '',
+      email: '', 
+      password: '', 
+      confPassword: '',
+      bio: '', 
+      image: '' 
+    }
   }
+  
+
+  
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -19,7 +28,10 @@ export default class Register extends Component {
     const user = { username, email, password, bio, image }
 
     authService.register({ ...user })
-      .then(data => console.log(data))
+      .then(data => {
+        Auth.saveUserInfo(data)
+        this.props.history.push('/')
+      })
   }
 
   handleChange = ({ target }) => {

@@ -24,6 +24,16 @@ class Auth {
 
     return false
   }
+
+  static saveUserInfo (data) {
+    const { user } = data
+
+    const { token, roles, username } = user
+
+    window.localStorage.setItem('authToken', token)
+    window.localStorage.setItem('username', username)
+    window.localStorage.setItem('roles', JSON.stringify(roles))
+  }
 }
 
 export default Auth

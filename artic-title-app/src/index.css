@@ -47,6 +47,10 @@ nav.navbar-menu a:hover {
     background-color: white;
 }
 
+.activeLink {
+  color: rgb(10, 10, 150)
+}
+
 div.welcome-wrapper {
     width: 70%;
     margin: 0 auto;

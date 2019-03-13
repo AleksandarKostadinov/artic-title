@@ -5,8 +5,10 @@ const articleUrl = `${baseUrl}articles`
 
 const create = (article) => crud.post(articleUrl, { article })
 const getFeed = () => crud.get(articleUrl)
+const getDetails = (slug) => crud.get(`${articleUrl}/${slug}`)
 
 export const articleService = {
   create,
-  getFeed
+  getFeed,
+  getDetails
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import ArticleListItem from './ArticleListItem';
+import ArticleListItem from './ArticleListItem/ArticleListItem'
 
 export default ({ articles }) => {
   return (

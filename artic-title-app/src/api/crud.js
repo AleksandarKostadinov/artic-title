@@ -9,6 +9,8 @@ const request = (method) => {
       authHeader = {}
     }
 
+    const toSendBody = (Object.keys(body).length > 0) ? { body: JSON.stringify(body) } : {}
+
     const promise = await fetch(url, {
       method,
       headers: {
@@ -16,7 +18,7 @@ const request = (method) => {
         'Data-Type': 'json',
         ...authHeader
       },
-      body: JSON.stringify(body)
+      ...toSendBody
     })
 
     return promise.json()

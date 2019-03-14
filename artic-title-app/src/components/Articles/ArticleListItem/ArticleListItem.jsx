@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import './ArticleListItem.css'
 
 export default ({ article }) => {
-  const detailsUrl = `/articles/${article.slug}`
-  console.log(article)
-
+  const detailsUrl = `/articles/details/${article.slug}`
   return (
     <div className='col col-sm-3 border border-danger'>
       List Item works!

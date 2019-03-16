@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import AuthContext from '../contexts/AuthContext';
 
 class AppNav extends Component {
@@ -26,7 +26,7 @@ class AppNav extends Component {
                     <NavLink exact activeClassName='activeLink' className='nav-link' to='/articles/all'>All</NavLink>
                   </li>
                   <li className='nav-item'>
-                    <NavLink exact activeClassName='activeLink' className='nav-link' to='/logout'>Helllo { Auth.getUsername() }!</NavLink>
+                    <NavLink exact activeClassName='activeLink' className='nav-link' to='/me'>Helllo { Auth.getUsername() }!</NavLink>
                   </li>
                   <li className='nav-item'>
                     <NavLink exact activeClassName='activeLink' className='nav-link' to='/logout'>logout</NavLink>

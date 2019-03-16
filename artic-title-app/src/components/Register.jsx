@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { removeEnd, kebapToCamel } from '../utils/stringParser';
-import { authService } from '../services/authService';
-import Auth from '../utils/auth';
+import { removeEnd, kebapToCamel } from '../utils/stringParser'
+import { authService } from '../services/authService'
+import AuthContext from '../contexts/AuthContext'
 
-export default class Register extends Component {
+class Register extends Component {
 
   constructor (props) {
     super(props)
@@ -26,6 +26,8 @@ export default class Register extends Component {
 
     const { username, email, password, bio, image } = this.state
     const user = { username, email, password, bio, image }
+
+    const { Auth } = this.context
 
     authService.register({ ...user })
       .then(data => {
@@ -117,7 +119,12 @@ export default class Register extends Component {
                   value={image}
                   onChange={this.handleChange} />
               </div>
-
+              {
+                image
+                  ? <img src={image} alt="Your avatar" />
+                  : null
+              }
+              <br />
               <button type='submit' className='btn btn-primary'>Sign up</button>
             </form>
           </div>
@@ -126,3 +133,7 @@ export default class Register extends Component {
     )
   }
 }
+
+Register.contextType = AuthContext
+
+export default Register

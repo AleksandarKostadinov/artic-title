@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { removeEnd, kebapToCamel } from '../utils/stringParser';
-import { authService } from '../services/authService';
-import Auth from '../utils/auth';
+import { removeEnd, kebapToCamel } from '../utils/stringParser'
+import { authService } from '../services/authService'
+import AuthContext from '../contexts/AuthContext'
 
-export default class Login extends Component {
+class Login extends Component {
 
   constructor (props) {
     super(props)
@@ -22,6 +22,8 @@ export default class Login extends Component {
 
     const { email, password } = this.state
     const user = {  email, password }
+
+    const { Auth } = this.context
 
     authService.login({ ...user })
       .then(data => {
@@ -82,4 +84,8 @@ export default class Login extends Component {
     )
   }
 }
+
+Login.contextType = AuthContext
+
+export default Login
 

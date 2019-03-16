@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { removeEnd, kebapToCamel } from '../../utils/stringParser'
 import { articleService } from '../../services/articleService'
 
 class DeleteArticle extends Component {

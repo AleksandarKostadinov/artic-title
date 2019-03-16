@@ -15,7 +15,9 @@ export default ({ article }) => {
           <hr />
           <p>{article.body}</p>
           <hr />
-          <p><Link to={'/articles/edit/' + article.slug}>Edit</Link></p>
+          <p>
+            <Link to={`/articles/edit/${article.slug}`}>Edit</Link>  <Link to={`/articles/delete/${article.slug}`}>Delete</Link>
+          </p>
         </div>
       </div>
     </div>

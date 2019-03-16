@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { removeEnd, kebapToCamel } from '../../utils/stringParser'
 import { articleService } from '../../services/articleService'
 
-class EditArticle extends Component {
+class DeleteArticle extends Component {
   constructor(props) {
     super(props)
 
@@ -10,7 +10,8 @@ class EditArticle extends Component {
       article: {
         title: '',
         description: '',
-        body: ''
+        body: '',
+        slug: ''
       },
       hasFetched: false      
     }
@@ -18,21 +19,15 @@ class EditArticle extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { title, description, body } = this.state.article
+    const { slug } = this.state.article
+    console.log(slug)
 
-    articleService.edit(this.props.match.params.slug, { title, description, body })
+    articleService.remove(slug)
       .then(data => {
-        this.props.history.push('/articles/feed')
+        console.log(data)
+        this.props.history.push('/articles/all')
       })
-  }
-
-  handleChange = ({ target }) => {
-    const { value, id } = target
-    const parsedId = kebapToCamel(removeEnd(id, '-edi'))
-
-    this.setState((prevState) => {
-      return { article: Object.assign({}, {...prevState.article}, {[parsedId]: value }) }
-    })
+      .catch(err => this.props.history.push('/articles/all'))
   }
 
   componentDidMount() {
@@ -42,6 +37,10 @@ class EditArticle extends Component {
     articleService.getDetails(slug)
       .then(data => {
         this.setState({...data, hasFetched: true})
+      })
+      .catch(err => {
+        this.props.history.push('/articles/all')
+        console.log(err)
       })
   }
   
@@ -65,8 +64,8 @@ class EditArticle extends Component {
                   type='text'
                   className='form-control'
                   id='title-edi'
-                  value={title}
-                  onChange={this.handleChange} />
+                  value={title} 
+                  disabled/>
               </div>
 
               <div className='form-group'>
@@ -76,7 +75,7 @@ class EditArticle extends Component {
                   id='description-edi'
                   rows='3'
                   value={description}
-                  onChange={this.handleChange} />
+                  disabled/>
               </div>
 
               <div className='form-group'>
@@ -85,11 +84,11 @@ class EditArticle extends Component {
                   className='form-control'
                   id='body-edi'
                   rows='8'
-                  value={body}
-                  onChange={this.handleChange} />
+                  value={body} 
+                  disabled/>
               </div>
               
-              <button type='submit' className='btn btn-success'>Edit</button>
+              <button type='submit' className='btn btn-danger'>Delete</button>
             </form>
           </div>
         </div>
@@ -98,4 +97,4 @@ class EditArticle extends Component {
   }
 }
 
-export default EditArticle
+export default DeleteArticle

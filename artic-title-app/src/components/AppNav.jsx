@@ -19,9 +19,6 @@ export default class AppNav extends Component {
               <NavLink exact activeClassName='activeLink' className='nav-link' to='/articles/create'>Create Articles</NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink exact activeClassName='activeLink' className='nav-link' to='/articles/top'>Top Articles</NavLink>
-            </li>
-            <li className='nav-item'>
               <NavLink exact activeClassName='activeLink' className='nav-link' to='/articles/feed'>Feed</NavLink>
             </li>
             <li className='nav-item'>

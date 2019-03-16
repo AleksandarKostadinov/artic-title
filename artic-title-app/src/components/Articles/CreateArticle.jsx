@@ -22,7 +22,6 @@ class CreateArticle extends Component {
 
     articleService.create({ title, description, body })
       .then(data => {
-        console.log(data)
         this.props.history.push('/articles/feed')
       })
   }

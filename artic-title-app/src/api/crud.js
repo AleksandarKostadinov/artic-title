@@ -3,6 +3,7 @@ import Auth from '../utils/auth'
 const request = (method) => {
   return async (url, body = {}) => {
     let token = Auth.getToken()
+    console.log(token)
     let authHeader = { 'Authorization': `Bearer ${token}` }
 
     if (!token) {
@@ -11,17 +12,31 @@ const request = (method) => {
 
     const toSendBody = (Object.keys(body).length > 0) ? { body: JSON.stringify(body) } : {}
 
-    const promise = await fetch(url, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'Data-Type': 'json',
-        ...authHeader
-      },
-      ...toSendBody
-    })
+    let response
+    try {
+      response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Data-Type': 'json',
+          ...authHeader
+        },
+        ...toSendBody
+      })
+    } catch (error) {
+      console.log(error)
+      throw new Error(error)
+    }
 
-    return promise.json()
+    try {
+      const text = await response.text()
+      console.log(text)// Parse it as text
+      const data = JSON.parse(text) // Try to parse it as json
+      return Promise.resolve(data)
+
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 }
 
@@ -29,5 +44,6 @@ export const crud = {
   post: request('post'),
   get: request('get'),
   put: request('put'),
-  patch: request('patch')
+  patch: request('patch'),
+  remove: request('delete')
 }

@@ -8,11 +8,13 @@ const getFeed = () => crud.get(`${articleUrl}/feed`)
 const get = () => crud.get(articleUrl)
 const getDetails = (slug) => crud.get(`${articleUrl}/${slug}`)
 const edit = (slug, article) => crud.put(`${articleUrl}/${slug}`, { article })
+const remove = (slug) => crud.remove(`${articleUrl}/${slug}`)
 
 export const articleService = {
   create,
   getFeed,
   getDetails,
   edit,
-  get
+  get,
+  remove
 }

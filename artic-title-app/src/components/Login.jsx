@@ -25,6 +25,10 @@ export default class Login extends Component {
 
     authService.login({ ...user })
       .then(data => {
+        if(data.errors) {
+          console.log(data.errors)
+          return
+        }
         Auth.saveUserInfo(data)
         this.props.history.push('/')
       })

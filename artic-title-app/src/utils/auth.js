@@ -34,6 +34,12 @@ class Auth {
     window.localStorage.setItem('username', username)
     window.localStorage.setItem('roles', JSON.stringify(roles))
   }
+
+  static logout () {
+    window.localStorage.removeItem('authToken')
+    window.localStorage.removeItem('username')
+    window.localStorage.removeItem('roles')
+  }
 }
 
 export default Auth

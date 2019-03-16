@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import AppNav from './components/AppNav'
 import Home from './components/Home'
 import Login from './components/Login'
+import Logout from './components/Logout'
 import Articles from './components/Articles/Articles'
 import Register from './components/Register'
 
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path='/' component={Home} exact />
           <Route path='/register' component={Register} exact />
           <Route path='/login' component={Login} exact />
+          <Route path='/logout' component={Logout} exact />
           <Route path='/articles' component={Articles} />
         </Switch>
       </div>

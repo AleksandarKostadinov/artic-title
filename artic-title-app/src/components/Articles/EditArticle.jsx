@@ -27,7 +27,7 @@ class EditArticle extends Component {
         }
         this.props.history.push('/articles/feed')
       })
-      //.catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 
   handleChange = ({ target }) => {

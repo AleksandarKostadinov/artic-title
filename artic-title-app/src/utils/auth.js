@@ -32,7 +32,7 @@ class Auth {
 
     window.localStorage.setItem('authToken', token)
     window.localStorage.setItem('username', username)
-    window.localStorage.setItem('roles', JSON.stringify(roles))
+    window.localStorage.setItem('roles', roles.join(','))
   }
 
   static logout () {

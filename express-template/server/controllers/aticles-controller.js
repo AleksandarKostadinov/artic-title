@@ -90,7 +90,7 @@ module.exports = {
 
   post: function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-      if (!user) { return res.sendStatus(401) }
+      if (!user) { return res.status(401).json({ error: 'Only the authenticated users can create articles. Please login!' }) }
       let article = new Article(req.body.article)
       article.author = user
       return article.save().then(function () {
@@ -111,7 +111,7 @@ module.exports = {
 
   detailsPut: function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-      if (req.article.author._id.toString() === req.payload.id.toString()) {
+      if (req.article.author._id.toString() === req.payload.id.toString() || user.roles.indexOf('Admin') > -1) {
         if (typeof req.body.article.title !== 'undefined') {
           req.article.title = req.body.article.title
         }
@@ -125,19 +125,19 @@ module.exports = {
           return res.json({ article: req.article.toJSONFor(user) })
         })
       } else {
-        return res.sendStatus(403)
+        return res.status(403).json({ error: 'Only the author and the admin can delete the article!' })
       }
     }).catch(next)
   },
 
   deleteArticle: function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
-      if (req.article.author._id.toString() === req.payload.id.toString()) {
+      if (req.article.author._id.toString() === req.payload.id.toString() || user.roles.indexOf('Admin') > -1) {
         req.article.remove().then(function () {
-          return res.sendStatus(204)
+          return res.status(200).json({ message: 'Article deleted.' })
         })
       } else {
-        return res.sendStatus(403)
+        return res.status(403).json({ error: 'Only the author and the admin can delete the article!' })
       }
     }).catch(next)
   },

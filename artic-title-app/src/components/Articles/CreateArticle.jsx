@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { toast } from 'react-toastify'
 import { removeEnd, kebapToCamel } from '../../utils/stringParser'
-import { articleService } from '../../services/articleService';
+import { articleService } from '../../services/articleService'
 
 class CreateArticle extends Component {
   constructor(props) {
@@ -22,7 +23,16 @@ class CreateArticle extends Component {
 
     articleService.create({ title, description, body })
       .then(data => {
-        this.props.history.push('/articles/feed')
+        toast.success(`Article "${data.article.title}" created successfully!`, {
+          position: toast.POSITION.TOP_RIGHT
+        })
+
+        this.props.history.push('/articles/all')
+      })
+      .catch(err => {
+        toast.error(JSON.stringify(err), {
+          position: toast.POSITION.TOP_LEFT
+        })
       })
   }
 

@@ -30,7 +30,7 @@ let auth = {
           if (user && user.roles.indexOf(role) > -1) {
             next()
           } else {
-            res.status(401).json({error: 'Unauthorized. For Admins only!'})
+            res.status(401).json({ error: 'Unauthorized. For Admins only!' })
           }
         }).catch(next)
     }

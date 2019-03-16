@@ -13,7 +13,7 @@ export default ({ article }) => {
       <div>
         <span className='badge badge-success'>Posted 2012-08-02 20:47:04</span>
         <Link to={detailsUrl} className='link'>Details</Link>
-        <div className='pull-right'><span className='label'>alice</span> <span className='label'>story</span> <span className='label'>blog</span> <span className='label'>personal</span></div>
+        {/* <div className='pull-right'><span className='label'>alice</span> <span className='label'>story</span> <span className='label'>blog</span> <span className='label'>personal</span></div> */}
       </div>
       <hr />
     </div>

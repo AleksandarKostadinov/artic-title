@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { toast } from 'react-toastify'
 import { removeEnd, kebapToCamel } from '../../utils/stringParser'
 import { articleService } from '../../services/articleService'
+import { handleArticleErrors } from '../handlers/handleArticleErrors';
 
 class EditArticle extends Component {
   constructor(props) {
@@ -12,8 +14,14 @@ class EditArticle extends Component {
         description: '',
         body: ''
       },
-      hasFetched: false      
+      hasFetched: false
     }
+  }
+
+  goBack = (e) => {
+    e.preventDefault()
+
+    this.props.history.goBack()
   }
 
   handleSubmit = (e) => {
@@ -22,12 +30,31 @@ class EditArticle extends Component {
 
     articleService.edit(this.props.match.params.slug, { title, description, body })
       .then(data => {
-        if(data.error) {
-          console.log(data.error)
+        const { error } = data
+
+        if (error) {
+          toast.error(error, {
+            position: toast.POSITION.TOP_LEFT
+          })
+        } else {
+          toast.success(`Article "${data.article.title}" edited successfully!`, {
+            position: toast.POSITION.TOP_RIGHT
+          })
         }
-        this.props.history.push('/articles/feed')
+
+        this.props.history.push('/articles/all')
       })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        if (err.error) {
+          toast.error(err.error, {
+            position: toast.POSITION.TOP_LEFT
+          })
+        }
+        toast.error(JSON.stringify(err), {
+          position: toast.POSITION.TOP_LEFT
+        })
+        this.props.history.push('/articles/all')
+      })
   }
 
   handleChange = ({ target }) => {
@@ -35,7 +62,7 @@ class EditArticle extends Component {
     const parsedId = kebapToCamel(removeEnd(id, '-edi'))
 
     this.setState((prevState) => {
-      return { article: Object.assign({}, {...prevState.article}, {[parsedId]: value }) }
+      return { article: Object.assign({}, { ...prevState.article }, { [parsedId]: value }) }
     })
   }
 
@@ -45,13 +72,13 @@ class EditArticle extends Component {
 
     articleService.getDetails(slug)
       .then(data => {
-        this.setState({...data, hasFetched: true})
+        this.setState({ ...data, hasFetched: true })
       })
   }
-  
+
 
   render() {
-    if(!this.state.hasFetched) {
+    if (!this.state.hasFetched) {
       return <div>Loading...</div>
     }
 
@@ -92,7 +119,8 @@ class EditArticle extends Component {
                   value={body}
                   onChange={this.handleChange} />
               </div>
-              
+
+              <button className='btn btn-secondary' onClick={this.goBack}>back</button>
               <button type='submit' className='btn btn-success'>Edit</button>
             </form>
           </div>

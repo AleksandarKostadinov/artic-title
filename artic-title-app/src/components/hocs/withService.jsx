@@ -15,7 +15,6 @@ const withService = (Component, serviceMethod) => {
     componentDidMount () {
       serviceMethod()
         .then(data => {
-          console.log(data)
           this.setState({ ...data, hasFeatched: true })
         })
     }
@@ -27,7 +26,6 @@ const withService = (Component, serviceMethod) => {
 
       return (
         <div>
-          Feed works!
           <Component articles={this.state.articles} {...this.props} />
         </div>
       )

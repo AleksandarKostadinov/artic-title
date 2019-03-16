@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { articleService } from '../../services/articleService'
+import { toast } from 'react-toastify'
 
 class DeleteArticle extends Component {
   constructor(props) {
@@ -16,6 +17,12 @@ class DeleteArticle extends Component {
     }
   }
 
+  goBack = (e) => {
+    e.preventDefault()
+
+    this.props.history.goBack()
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     const { slug } = this.state.article
@@ -23,10 +30,33 @@ class DeleteArticle extends Component {
 
     articleService.remove(slug)
       .then(data => {
-        console.log(data)
+        const { error, message } = data
+
+        if(error) {
+          toast.error(error, {
+            position: toast.POSITION.TOP_LEFT
+          })
+        }
+
+        if(message) {
+          toast.success(message, {
+            position: toast.POSITION.TOP_RIGHT
+          })
+        }
+
         this.props.history.push('/articles/all')
       })
-      .catch(err => this.props.history.push('/articles/all'))
+      .catch((err) =>{
+        if(err.error) {
+          toast.error(err.error, {
+            position: toast.POSITION.TOP_LEFT
+          })
+        }
+        toast.error(JSON.stringify(err), {
+          position: toast.POSITION.TOP_LEFT
+        })
+        this.props.history.push('/articles/all')
+      })
   }
 
   componentDidMount() {
@@ -86,7 +116,7 @@ class DeleteArticle extends Component {
                   value={body} 
                   disabled/>
               </div>
-              
+              <button className='btn btn-secondary' onClick={this.goBack}>back</button>
               <button type='submit' className='btn btn-danger'>Delete</button>
             </form>
           </div>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { toast } from 'react-toastify'
 import { removeEnd, kebapToCamel } from '../utils/stringParser'
 import { authService } from '../services/authService'
 import AuthContext from '../contexts/AuthContext'
+import { handleValidationErrors } from './handlers/handleValidationErrors'
 
 class Login extends Component {
 
@@ -27,13 +29,20 @@ class Login extends Component {
 
     authService.login({ ...user })
       .then(data => {
-        if(data.errors) {
-          console.log(data.errors)
+        const { errors } = data
+
+        if(errors) {
+          handleValidationErrors(errors)
+
           return
         }
+        toast.success(`Wellcome, ${data.user.username}. You have logged in.`, {
+          position: toast.POSITION.TOP_RIGHT
+        })
         Auth.saveUserInfo(data)
-        this.props.history.push('/')
+        this.props.history.push('/articles/all')
       })
+      .catch()
   }
 
   handleChange = ({ target }) => {
@@ -56,7 +65,7 @@ class Login extends Component {
                 <div className='form-group col-md-6'>
                   <label htmlFor='email-log'>Email</label>
                   <input
-                    type='email'
+                    type='text'
                     className='form-control'
                     id='email-log'
                     placeholder='Email'

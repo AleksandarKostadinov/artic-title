@@ -25,9 +25,9 @@ router.param('article', function (req, res, next, slug) {
 
 router.get('/:article', auth.optional, articlesController.detailsGet)
 
-router.put('/:article', auth.required, auth.isInRole('Admin'), articlesController.detailsPut)
+router.put('/:article', auth.required, articlesController.detailsPut)
 
-router.delete('/:article', auth.required, auth.isInRole('Admin'), articlesController.deleteArticle)
+router.delete('/:article', auth.required, articlesController.deleteArticle)
 
 router.get('/:article/comments', auth.optional, articlesController.commentsByArticleGet)
 

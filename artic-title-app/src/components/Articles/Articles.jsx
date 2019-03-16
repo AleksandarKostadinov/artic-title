@@ -5,6 +5,7 @@ import Article from './Article'
 import EditArticle from './EditArticle'
 import { ArticlesFeed, AllArticles } from '../hocs/hocs'
 import DeleteArticle from './DeleteArticle'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
 export default class Articles extends Component {
   render () {
@@ -16,10 +17,10 @@ export default class Articles extends Component {
         <Switch>
           <Route path={`${currentPath}/feed`} exact component={ArticlesFeed} />
           <Route path={`${currentPath}/all`} exact component={AllArticles} />
-          <Route path={`${currentPath}/create`} exact component={CreateArticle} />
+          <PrivateRoute path={`${currentPath}/create`} exact component={CreateArticle} />
           <Route path={`${currentPath}/details/:slug`} component={Article} />
-          <Route path={`${currentPath}/edit/:slug`} component={EditArticle} />
-          <Route path={`${currentPath}/delete/:slug`} component={DeleteArticle} />
+          <PrivateRoute path={`${currentPath}/edit/:slug`} component={EditArticle} />
+          <PrivateRoute path={`${currentPath}/delete/:slug`} component={DeleteArticle} />
           <Route component={AllArticles} />} />
         </Switch>
       </div>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { toast } from 'react-toastify'
 import { removeEnd, kebapToCamel } from '../utils/stringParser'
 import { authService } from '../services/authService'
 import AuthContext from '../contexts/AuthContext'
+import { handleValidationErrors } from './handlers/handleValidationErrors'
 
 class Register extends Component {
 
@@ -31,8 +33,19 @@ class Register extends Component {
 
     authService.register({ ...user })
       .then(data => {
+        const { errors } = data
+
+        if(errors) {
+          handleValidationErrors(errors)
+
+          return
+        }
+
+        toast.success(`Wellcome, ${data.user.username}. You have registered.`, {
+          position: toast.POSITION.TOP_RIGHT
+        })
         Auth.saveUserInfo(data)
-        this.props.history.push('/')
+        this.props.history.push('/articles/all')
       })
   }
 

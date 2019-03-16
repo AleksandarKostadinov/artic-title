@@ -3,7 +3,6 @@ import Auth from '../utils/auth'
 const request = (method) => {
   return async (url, body = {}) => {
     let token = Auth.getToken()
-    console.log(token)
     let authHeader = { 'Authorization': `Bearer ${token}` }
 
     if (!token) {
@@ -30,7 +29,6 @@ const request = (method) => {
 
     try {
       const text = await response.text()
-      console.log(text)// Parse it as text
       const data = JSON.parse(text) // Try to parse it as json
       return Promise.resolve(data)
 

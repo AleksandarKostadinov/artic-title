@@ -22,8 +22,12 @@ class EditArticle extends Component {
 
     articleService.edit(this.props.match.params.slug, { title, description, body })
       .then(data => {
+        if(data.error) {
+          console.log(data.error)
+        }
         this.props.history.push('/articles/feed')
       })
+      //.catch(err => console.log(err))
   }
 
   handleChange = ({ target }) => {

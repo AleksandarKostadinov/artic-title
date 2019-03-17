@@ -8,9 +8,9 @@ class CreateArticle extends Component {
     super(props)
 
     this.state = {
-      title: 'Default title',
-      description: 'WOW something happened',
-      body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur unde enim mollitia numquam corrupti totam quia natus! A nesciunt deserunt dolores vel dolor tenetur optio voluptatum minus libero pariatur? Veniam?'
+      title: '',
+      description: '',
+      body: ''
     }
   }
 
@@ -59,7 +59,8 @@ class CreateArticle extends Component {
                   className='form-control'
                   id='title-cre'
                   value={title}
-                  onChange={this.handleChange} />
+                  onChange={this.handleChange}
+                  placeholder='Title' />
               </div>
 
               <div className='form-group'>
@@ -69,7 +70,8 @@ class CreateArticle extends Component {
                   id='description-cre'
                   rows='3'
                   value={description}
-                  onChange={this.handleChange} />
+                  onChange={this.handleChange}
+                  placeholder='Description'  />
               </div>
 
               <div className='form-group'>
@@ -79,7 +81,8 @@ class CreateArticle extends Component {
                   id='body-cre'
                   rows='8'
                   value={body}
-                  onChange={this.handleChange} />
+                  onChange={this.handleChange}
+                  placeholder='Content'  />
               </div>
               
               <button type='submit' className='btn btn-success'>Create</button>

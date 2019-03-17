@@ -44,7 +44,7 @@ class AppNav extends Component {
                       <NavLink exact activeClassName='activeLink' className='nav-link' to='/articles/all'>All</NavLink>
                     </li>
                     <li className='nav-item'>
-                      <NavLink exact activeClassName='activeLink' className='nav-link' to='/me'>Helllo {Auth.getUsername()}!</NavLink>
+                      <NavLink exact activeClassName='activeLink' className='nav-link' to='/profiles/me'>Helllo {Auth.getUsername()}!</NavLink>
                     </li>
                     <li className='nav-item'>
                       <NavLink exact activeClassName='activeLink' className='nav-link' to='/logout'>logout</NavLink>

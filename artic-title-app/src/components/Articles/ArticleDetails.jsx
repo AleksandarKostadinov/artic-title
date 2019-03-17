@@ -8,7 +8,7 @@ export default ({ article, ...otherProps }) => {
       <div className='col col-md-8 col-of'>
         <div className='blog-post'>
           <h2 className='blog-post-title'>{article.title}</h2>
-          <p className='blog-post-meta'>{article.createdAt} by <Link to='/profiles'>{article.author.username}</Link></p>
+          <p className='blog-post-meta'>{article.createdAt} by <Link to={`/profiles/${article.author.username}`}>{article.author.username}</Link></p>
 
           <p>{article.description}</p>
           <hr />

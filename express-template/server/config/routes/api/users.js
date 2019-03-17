@@ -8,7 +8,7 @@ router.post('/login', userContriller.loginPost)
 
 router.get('/me', auth.required, userContriller.meGet)
 
-router.put('/me', auth.required, auth.isInRole('Admin'), userContriller.mePut)
+router.put('/me', auth.required, userContriller.mePut)
 
 router.use(function (err, req, res, next) {
   if (err.name === 'ValidationError') {

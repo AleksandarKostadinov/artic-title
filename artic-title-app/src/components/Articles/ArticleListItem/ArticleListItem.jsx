@@ -5,9 +5,7 @@ import './ArticleListItem.css'
 export default ({ article }) => {
   const detailsUrl = `/articles/details/${article.slug}`
   return (
-    <div className='col col-sm-3 border border-danger'>
-      List Item works!
-
+    <div className='col col-lg-3 col-md-4 col-sm-6 col-sx-12 border border-danger'>
       <h1>{article.title}</h1>
       <p>{article.description}</p>
       <div>

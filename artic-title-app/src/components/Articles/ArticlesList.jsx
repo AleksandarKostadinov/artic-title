@@ -6,7 +6,7 @@ export default ({ articles }) => {
     <div className='container'>
       <div className='row bg-secondary text-white'>
         {
-          articles.map.lenght
+          articles.map.length
             ? articles.map(a => <ArticleListItem article={a} key={a.slug} />)
             : <h5>Follow some one to get your articles feed!</h5>
         }

@@ -28,7 +28,6 @@ export default class MyProfile extends Component {
 
     return (
       <div>
-        {JSON.stringify(this.state.profile)}
         <div className='container'>
           <div className='row profile'>
             <div className='col-md-3'>

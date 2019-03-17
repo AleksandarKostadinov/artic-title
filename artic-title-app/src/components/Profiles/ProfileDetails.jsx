@@ -52,7 +52,6 @@ export default class ProfileDetails extends Component {
     const { profile } = this.state
 
     return (<div className='container'>
-      {JSON.stringify(profile)}
       <div className='row profile'>
         <div className='col-md-3'>
           <div className='profile-sidebar'>
